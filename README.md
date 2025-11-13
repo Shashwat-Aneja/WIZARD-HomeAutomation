@@ -4,8 +4,6 @@ Smart home automation using Arduino, relay modules and Bluetooth.
 
 The complete circuit design for WIZARD is included in the repository.
 
-### ASCII Circuit (Quick View)
-
 ## 🛠 Hardware Used
 
 | Component | Quantity | Purpose |
