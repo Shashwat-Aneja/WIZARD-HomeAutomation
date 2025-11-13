@@ -35,3 +35,7 @@ The complete circuit design for WIZARD is included in the repository.
 - Neutral wire must always go directly to the appliance.  
 - Use proper insulation and avoid loose connections.  
 - Test the system with a small 5V/12V load before using AC devices.
+
+  ## 📸 Media
+No images or videos are included in this repository. All functionality is demonstrated through code, circuit diagrams, and documentation.
+
