@@ -1,0 +1,23 @@
+# Arduino build files
+*.hex
+*.eep
+*.elf
+
+# Compiled object files
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.exe
+
+# Temporary build folders
+build/
+output/
+*.tmp
+
+# MacOS metadata
+.DS_Store
+
+# Windows metadata
+Thumbs.db
