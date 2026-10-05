@@ -51,6 +51,6 @@ void setRelay(int relayPin, bool enabled) {\n  digitalWrite(relayPin, enabled ? 
     return;
   }
 
-  Serial.print("Command OK: ");
+  Serial.print("State updated: ");\n  Serial.print(cmd);\n  Serial.println(" OK");\n  Serial.print("Command OK: ");
   Serial.println(cmd);
 }
