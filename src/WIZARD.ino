@@ -38,7 +38,7 @@ void loop() {
 }
 
 void setRelay(int relayPin, bool enabled) {\n  digitalWrite(relayPin, enabled ? RELAY_ON : RELAY_OFF);\n}\n\nvoid printHelp() {\n  Serial.println("A1/A0 B1/B0 C1/C0 D1/D0 ALL1 ALL0 STATUS");\n}\n\nvoid handleCommand(String cmd) {
-  if (cmd == "HELP") { printHelp(); return; }\n  if (cmd == "A1") setRelay(relay1, true);
+  if (cmd == "HELP") { printHelp(); return; }\n  if (cmd == "ALL0") { setRelay(relay1, false); setRelay(relay2, false); setRelay(relay3, false); setRelay(relay4, false); Serial.println("ALL OFF"); return; }\n  if (cmd == "A1") setRelay(relay1, true);
   else if (cmd == "A0") digitalWrite(relay1, RELAY_OFF);
   else if (cmd == "B1") setRelay(relay2, true);
   else if (cmd == "B0") digitalWrite(relay2, RELAY_OFF);
