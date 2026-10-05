@@ -19,10 +19,10 @@ void setup() {
   pinMode(relay3, OUTPUT);
   pinMode(relay4, OUTPUT);
 
-  digitalWrite(relay1, RELAY_OFF);
-  digitalWrite(relay2, RELAY_OFF);
-  digitalWrite(relay3, RELAY_OFF);
-  digitalWrite(relay4, RELAY_OFF);
+  setRelay(relay1, false);
+  setRelay(relay2, false);
+  setRelay(relay3, false);
+  setRelay(relay4, false);
 
   Serial.println("WIZARD System Ready");
   Serial.println("Send A1/A0, B1/B0, C1/C0, D1/D0");
@@ -37,14 +37,14 @@ void loop() {
   }
 }
 
-void handleCommand(String cmd) {
-  if (cmd == "A1") digitalWrite(relay1, RELAY_ON);
+void setRelay(int relayPin, bool enabled) {\n  digitalWrite(relayPin, enabled ? RELAY_ON : RELAY_OFF);\n}\n\nvoid handleCommand(String cmd) {
+  if (cmd == "A1") setRelay(relay1, true);
   else if (cmd == "A0") digitalWrite(relay1, RELAY_OFF);
-  else if (cmd == "B1") digitalWrite(relay2, RELAY_ON);
+  else if (cmd == "B1") setRelay(relay2, true);
   else if (cmd == "B0") digitalWrite(relay2, RELAY_OFF);
-  else if (cmd == "C1") digitalWrite(relay3, RELAY_ON);
+  else if (cmd == "C1") setRelay(relay3, true);
   else if (cmd == "C0") digitalWrite(relay3, RELAY_OFF);
-  else if (cmd == "D1") digitalWrite(relay4, RELAY_ON);
+  else if (cmd == "D1") setRelay(relay4, true);
   else if (cmd == "D0") digitalWrite(relay4, RELAY_OFF);
   else {
     Serial.println("Invalid Command");
