@@ -47,7 +47,7 @@ void setRelay(int relayPin, bool enabled) {\n  digitalWrite(relayPin, enabled ? 
   else if (cmd == "D1") setRelay(relay4, true);
   else if (cmd == "D0") digitalWrite(relay4, RELAY_OFF);
   else {
-    Serial.println("Invalid Command");
+    Serial.print("Invalid Command: ");\n    Serial.println(cmd);
     return;
   }
 
