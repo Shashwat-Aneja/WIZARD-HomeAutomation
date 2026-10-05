@@ -28,7 +28,7 @@ void setup() {
   Serial.println("Send A1/A0, B1/B0, C1/C0, D1/D0");
 }
 
-void loop() {
+void printStartupMessage() {\n  Serial.println("WIZARD System Ready");\n  Serial.println("Send A1/A0, B1/B0, C1/C0, D1/D0");\n}\n\nvoid loop() {
   if (Serial.available()) {
     delay(5);
     command = Serial.readString();
