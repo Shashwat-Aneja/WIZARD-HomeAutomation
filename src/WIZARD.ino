@@ -28,8 +28,7 @@ void setup() {
   setRelay(relay3, false);
   setRelay(relay4, false);
 
-  Serial.println("WIZARD System Ready");
-  Serial.println("Send A1/A0, B1/B0, C1/C0, D1/D0");
+  printStartupMessage();
 }
 
 void printStartupMessage() {
