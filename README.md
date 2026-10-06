@@ -15,6 +15,17 @@ The complete circuit design for WIZARD is included in the repository.
 | 230V AC Appliances | 4 | Loads (A, B, C, D) |
 | Optional: Buzzer/LED | 1 | System status |
 
+## 🔌 Relay Pin Mapping
+
+| Appliance | Arduino Pin | Relay State |
+|-----------|-------------|-------------|
+| A | D2 | LOW = ON |
+| B | D3 | LOW = ON |
+| C | D4 | LOW = ON |
+| D | D5 | LOW = ON |
+
+The relay module is active-low, so the firmware drives a relay pin LOW to switch its appliance ON.
+
 ## 📡 Bluetooth Command Table
 
 | Command | Function |
