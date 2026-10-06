@@ -27,6 +27,10 @@ The complete circuit design for WIZARD is included in the repository.
 | C0 | Turn OFF Appliance C |
 | D1 | Turn ON Appliance D |
 | D0 | Turn OFF Appliance D |
+| ALL1 | Turn ON all appliances |
+| ALL0 | Turn OFF all appliances |
+| STATUS | Report current relay states |
+| HELP | Show supported commands |
 
 ## ⚠️ Safety Notes
 
