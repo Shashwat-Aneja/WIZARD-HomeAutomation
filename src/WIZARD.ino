@@ -62,7 +62,8 @@ void printStatus() {
 }
 
 void printHelp() {
-  Serial.println("A1/A0 B1/B0 C1/C0 D1/D0 ALL1 ALL0 STATUS");
+  Serial.println("A1/A0 B1/B0 C1/C0 D1/D0 ALL1 ALL0 STATUS HELP");
+  Serial.println("A-D control individual relays; ALL1/ALL0 control every relay.");
 }
 
 void setAllRelays(bool enabled) {
