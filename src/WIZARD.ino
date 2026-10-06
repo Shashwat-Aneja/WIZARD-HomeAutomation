@@ -66,11 +66,18 @@ void printHelp() {
   Serial.println("A1/A0 B1/B0 C1/C0 D1/D0 ALL1 ALL0 STATUS");
 }
 
+void setAllRelays(bool enabled) {
+  setRelay(relay1, enabled);
+  setRelay(relay2, enabled);
+  setRelay(relay3, enabled);
+  setRelay(relay4, enabled);
+}
+
 void handleCommand(String cmd) {
   if (cmd == CMD_STATUS) { printStatus(); return; }
   if (cmd == CMD_HELP) { printHelp(); return; }
-  if (cmd == CMD_ALL_ON) { setRelay(relay1, true); setRelay(relay2, true); setRelay(relay3, true); setRelay(relay4, true); Serial.println("ALL ON"); return; }
-  if (cmd == CMD_ALL_OFF) { setRelay(relay1, false); setRelay(relay2, false); setRelay(relay3, false); setRelay(relay4, false); Serial.println("ALL OFF"); return; }
+  if (cmd == CMD_ALL_ON) { setAllRelays(true) Serial.println("ALL ON"); return; }
+  if (cmd == CMD_ALL_OFF) { setAllRelays(false) Serial.println("ALL OFF"); return; }
   if (cmd == "A1") setRelay(relay1, true);
   else if (cmd == "A0") setRelay(relay1, false);
   else if (cmd == "B1") setRelay(relay2, true);
