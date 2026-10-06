@@ -43,6 +43,15 @@ The relay module is active-low, so the firmware drives a relay pin LOW to switch
 | STATUS | Report current relay states |
 | HELP | Show supported commands |
 
+## 🧪 Firmware Test Checklist
+
+1. Upload `src/WIZARD.ino` with the Arduino IDE.
+2. Open Serial Monitor at 9600 baud.
+3. Send `HELP` and confirm the supported command list is returned.
+4. Test each A/B/C/D ON and OFF command individually.
+5. Test `ALL1`, `ALL0`, and `STATUS` before connecting mains-powered loads.
+6. Verify invalid and oversized commands are rejected without changing relay state.
+
 ## ⚠️ Safety Notes
 
 - Appliances run on **high voltage AC**, handle carefully.  
