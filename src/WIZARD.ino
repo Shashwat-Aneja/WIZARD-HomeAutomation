@@ -10,7 +10,11 @@ const int relay4 = 5;
 const int RELAY_ON = LOW;
 const int RELAY_OFF = HIGH;
 
-const String CMD_HELP = "HELP";\nconst String CMD_STATUS = "STATUS";\nconst String CMD_ALL_ON = "ALL1";\nconst String CMD_ALL_OFF = "ALL0";\nString command = "";
+const String CMD_HELP = "HELP";
+const String CMD_STATUS = "STATUS";
+const String CMD_ALL_ON = "ALL1";
+const String CMD_ALL_OFF = "ALL0";
+String command = "";
 
 void setup() {
   Serial.begin(9600);
@@ -28,7 +32,12 @@ void setup() {
   Serial.println("Send A1/A0, B1/B0, C1/C0, D1/D0");
 }
 
-void printStartupMessage() {\n  Serial.println("WIZARD System Ready");\n  Serial.println("Send A1/A0, B1/B0, C1/C0, D1/D0");\n}\n\nvoid loop() {
+void printStartupMessage() {
+  Serial.println("WIZARD System Ready");
+  Serial.println("Send A1/A0, B1/B0, C1/C0, D1/D0");
+}
+
+void loop() {
   if (Serial.available()) {
     delay(5);
     command = Serial.readString();
@@ -37,8 +46,31 @@ void printStartupMessage() {\n  Serial.println("WIZARD System Ready");\n  Serial
   }
 }
 
-void setRelay(int relayPin, bool enabled) {\n  digitalWrite(relayPin, enabled ? RELAY_ON : RELAY_OFF);\n}\n\n// Bluetooth protocol: A/B/C/D followed by 1 or 0 controls one relay.\n// ALL1 and ALL0 control all relays. STATUS reports current states.\n// Relays are active-low, so RELAY_ON is LOW and RELAY_OFF is HIGH.\n\nvoid printStatus() {\n  Serial.print("A:"); Serial.println(digitalRead(relay1) == RELAY_ON ? "ON" : "OFF");\n  Serial.print("B:"); Serial.println(digitalRead(relay2) == RELAY_ON ? "ON" : "OFF");\n  Serial.print("C:"); Serial.println(digitalRead(relay3) == RELAY_ON ? "ON" : "OFF");\n  Serial.print("D:"); Serial.println(digitalRead(relay4) == RELAY_ON ? "ON" : "OFF");\n}\n\nvoid printHelp() {\n  Serial.println("A1/A0 B1/B0 C1/C0 D1/D0 ALL1 ALL0 STATUS");\n}\n\nvoid handleCommand(String cmd) {
-  if (cmd == CMD_STATUS) { printStatus(); return; }\n  if (cmd == CMD_HELP) { printHelp(); return; }\n  if (cmd == CMD_ALL_ON) { setRelay(relay1, true); setRelay(relay2, true); setRelay(relay3, true); setRelay(relay4, true); Serial.println("ALL ON"); return; }\n  if (cmd == CMD_ALL_OFF) { setRelay(relay1, false); setRelay(relay2, false); setRelay(relay3, false); setRelay(relay4, false); Serial.println("ALL OFF"); return; }\n  if (cmd == "A1") setRelay(relay1, true);
+void setRelay(int relayPin, bool enabled) {
+  digitalWrite(relayPin, enabled ? RELAY_ON : RELAY_OFF);
+}
+
+// Bluetooth protocol: A/B/C/D followed by 1 or 0 controls one relay.
+// ALL1 and ALL0 control all relays. STATUS reports current states.
+// Relays are active-low, so RELAY_ON is LOW and RELAY_OFF is HIGH.
+
+void printStatus() {
+  Serial.print("A:"); Serial.println(digitalRead(relay1) == RELAY_ON ? "ON" : "OFF");
+  Serial.print("B:"); Serial.println(digitalRead(relay2) == RELAY_ON ? "ON" : "OFF");
+  Serial.print("C:"); Serial.println(digitalRead(relay3) == RELAY_ON ? "ON" : "OFF");
+  Serial.print("D:"); Serial.println(digitalRead(relay4) == RELAY_ON ? "ON" : "OFF");
+}
+
+void printHelp() {
+  Serial.println("A1/A0 B1/B0 C1/C0 D1/D0 ALL1 ALL0 STATUS");
+}
+
+void handleCommand(String cmd) {
+  if (cmd == CMD_STATUS) { printStatus(); return; }
+  if (cmd == CMD_HELP) { printHelp(); return; }
+  if (cmd == CMD_ALL_ON) { setRelay(relay1, true); setRelay(relay2, true); setRelay(relay3, true); setRelay(relay4, true); Serial.println("ALL ON"); return; }
+  if (cmd == CMD_ALL_OFF) { setRelay(relay1, false); setRelay(relay2, false); setRelay(relay3, false); setRelay(relay4, false); Serial.println("ALL OFF"); return; }
+  if (cmd == "A1") setRelay(relay1, true);
   else if (cmd == "A0") digitalWrite(relay1, RELAY_OFF);
   else if (cmd == "B1") setRelay(relay2, true);
   else if (cmd == "B0") digitalWrite(relay2, RELAY_OFF);
@@ -47,10 +79,14 @@ void setRelay(int relayPin, bool enabled) {\n  digitalWrite(relayPin, enabled ? 
   else if (cmd == "D1") setRelay(relay4, true);
   else if (cmd == "D0") digitalWrite(relay4, RELAY_OFF);
   else {
-    Serial.print("Invalid Command: ");\n    Serial.println(cmd);
+    Serial.print("Invalid Command: ");
+    Serial.println(cmd);
     return;
   }
 
-  Serial.print("State updated: ");\n  Serial.print(cmd);\n  Serial.println(" OK");\n  Serial.print("Command OK: ");
+  Serial.print("State updated: ");
+  Serial.print(cmd);
+  Serial.println(" OK");
+  Serial.print("Command OK: ");
   Serial.println(cmd);
 }
