@@ -74,6 +74,10 @@ void setAllRelays(bool enabled) {
 }
 
 void handleCommand(String cmd) {
+  if (cmd.length() > 16) {
+    Serial.println("Invalid Command: too long");
+    return;
+  }
   if (cmd == CMD_STATUS) { printStatus(); return; }
   if (cmd == CMD_HELP) { printHelp(); return; }
   if (cmd == CMD_ALL_ON) { setAllRelays(true) Serial.println("ALL ON"); return; }
