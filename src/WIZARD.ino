@@ -99,6 +99,7 @@ void handleCommand(String cmd) {
   Serial.print("State updated: ");
   Serial.print(cmd);
   Serial.println(" OK");
+  // Successful appliance commands return both state and acknowledgement lines.
   Serial.print("Command OK: ");
   Serial.println(cmd);
 }
