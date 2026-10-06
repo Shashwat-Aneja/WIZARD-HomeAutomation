@@ -72,13 +72,13 @@ void handleCommand(String cmd) {
   if (cmd == CMD_ALL_ON) { setRelay(relay1, true); setRelay(relay2, true); setRelay(relay3, true); setRelay(relay4, true); Serial.println("ALL ON"); return; }
   if (cmd == CMD_ALL_OFF) { setRelay(relay1, false); setRelay(relay2, false); setRelay(relay3, false); setRelay(relay4, false); Serial.println("ALL OFF"); return; }
   if (cmd == "A1") setRelay(relay1, true);
-  else if (cmd == "A0") digitalWrite(relay1, RELAY_OFF);
+  else if (cmd == "A0") setRelay(relay1, false);
   else if (cmd == "B1") setRelay(relay2, true);
-  else if (cmd == "B0") digitalWrite(relay2, RELAY_OFF);
+  else if (cmd == "B0") setRelay(relay2, false);
   else if (cmd == "C1") setRelay(relay3, true);
-  else if (cmd == "C0") digitalWrite(relay3, RELAY_OFF);
+  else if (cmd == "C0") setRelay(relay3, false);
   else if (cmd == "D1") setRelay(relay4, true);
-  else if (cmd == "D0") digitalWrite(relay4, RELAY_OFF);
+  else if (cmd == "D0") setRelay(relay4, false);
   else {
     Serial.print("Invalid Command: ");
     Serial.println(cmd);
