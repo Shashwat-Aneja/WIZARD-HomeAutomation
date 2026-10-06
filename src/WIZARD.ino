@@ -42,6 +42,7 @@ void loop() {
     delay(5);
     command = Serial.readString();
     command.trim();
+    command.toUpperCase();
     handleCommand(command);
   }
 }
