@@ -81,7 +81,7 @@ void handleCommand(String cmd) {
   if (cmd == CMD_STATUS) { printStatus(); return; }
   if (cmd == CMD_HELP) { printHelp(); return; }
   if (cmd == CMD_ALL_ON) { setAllRelays(true); Serial.println("ALL ON"); return; }
-  if (cmd == CMD_ALL_OFF) { setAllRelays(false) Serial.println("ALL OFF"); return; }
+  if (cmd == CMD_ALL_OFF) { setAllRelays(false); Serial.println("ALL OFF"); return; }
   if (cmd == "A1") setRelay(relay1, true);
   else if (cmd == "A0") setRelay(relay1, false);
   else if (cmd == "B1") setRelay(relay2, true);
