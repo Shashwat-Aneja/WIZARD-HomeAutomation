@@ -4,6 +4,10 @@ Smart home automation using Arduino, relay modules and Bluetooth.
 
 The complete circuit design for WIZARD is included in the repository.
 
+## 💻 Firmware Scope
+
+The current firmware supports individual relay control, all-relay scenes, relay status reporting, help output, command normalization, and invalid-input protection.
+
 ## 🛠 Hardware Used
 
 | Component | Quantity | Purpose |
