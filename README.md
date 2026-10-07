@@ -72,6 +72,10 @@ Incoming commands are trimmed and converted to uppercase, so commands such as `a
 - Use proper insulation and avoid loose connections.  
 - Test the system with a small 5V/12V load before using AC devices.
 
-  ## 📸 Media
+  ## 🖥️ Serial Monitor
+
+Use **9600 baud** when testing the firmware through the Arduino Serial Monitor. Accepted appliance commands return a state update followed by a `Command OK` acknowledgement.
+
+## 📸 Media
 No images or videos are included in this repository. All functionality is demonstrated through code, circuit diagrams, and documentation.
 
