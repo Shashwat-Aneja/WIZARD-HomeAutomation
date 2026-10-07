@@ -60,6 +60,10 @@ The relay module is active-low: `LOW` switches an appliance ON and `HIGH` switch
 
 Commands are trimmed and converted to uppercase before processing. Individual appliance commands use a letter followed by `1` or `0`; scene commands use `ALL1` and `ALL0`. Successful commands return a state update followed by a `Command OK` acknowledgement. Unsupported commands return an `Invalid Command` response.
 
+## 🧹 Command Handling
+
+Incoming commands are trimmed and converted to uppercase, so commands such as `a1` and ` A1 ` are accepted. Empty, oversized, and unsupported commands are rejected without changing relay state.
+
 ## ⚠️ Safety Notes
 
 - Appliances run on **high voltage AC**, handle carefully.  
