@@ -70,12 +70,21 @@ void setAllRelays(bool enabled) {
   setRelay(relay4, enabled);
 }
 
+bool isRelayCommand(const String &cmd) {
+  return cmd.length() == 2 && cmd.charAt(0) >= 'A' && cmd.charAt(0) <= 'D' && (cmd.charAt(1) == '0' || cmd.charAt(1) == '1');
+}
+
 void handleCommand(String cmd) {
   if (cmd.length() > 16) {
     Serial.println("Invalid Command: too long");
     return;
   }
   if (cmd == CMD_STATUS) { printStatus(); return; }
+  if (!isRelayCommand(cmd) && cmd != CMD_HELP && cmd != CMD_ALL_ON && cmd != CMD_ALL_OFF) {
+    Serial.print("Invalid Command: ");
+    Serial.println(cmd);
+    return;
+  }
   if (cmd == CMD_HELP) { printHelp(); return; }
   if (cmd == CMD_ALL_ON) { setAllRelays(true); Serial.println("ALL ON"); return; }
   if (cmd == CMD_ALL_OFF) { setAllRelays(false); Serial.println("ALL OFF"); return; }
