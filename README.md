@@ -68,6 +68,10 @@ Commands are trimmed and converted to uppercase before processing. Individual ap
 
 Incoming commands are trimmed and converted to uppercase, so commands such as `a1` and ` A1 ` are accepted. Empty, oversized, and unsupported commands are rejected without changing relay state.
 
+## ✅ Pre-Connection Checklist
+
+Before connecting mains-powered appliances, verify relay pin mapping, test every command with a low-voltage load, and confirm `ALL0` leaves every relay OFF.
+
 ## ⚠️ Safety Notes
 
 - Appliances run on **high voltage AC**, handle carefully.  
