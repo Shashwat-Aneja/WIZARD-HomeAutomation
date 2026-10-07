@@ -74,6 +74,11 @@ bool isRelayCommand(const String &cmd) {
   return cmd.length() == 2 && cmd.charAt(0) >= 'A' && cmd.charAt(0) <= 'D' && (cmd.charAt(1) == '0' || cmd.charAt(1) == '1');
 }
 
+void applyRelayCommand(const String &cmd) {
+  int relayPin = relay1 + (cmd.charAt(0) - 'A');
+  setRelay(relayPin, cmd.charAt(1) == '1');
+}
+
 void handleCommand(String cmd) {
   if (cmd.length() > 16) {
     Serial.println("Invalid Command: too long");
@@ -88,14 +93,7 @@ void handleCommand(String cmd) {
   if (cmd == CMD_HELP) { printHelp(); return; }
   if (cmd == CMD_ALL_ON) { setAllRelays(true); Serial.println("ALL ON"); return; }
   if (cmd == CMD_ALL_OFF) { setAllRelays(false); Serial.println("ALL OFF"); return; }
-  if (cmd == "A1") setRelay(relay1, true);
-  else if (cmd == "A0") setRelay(relay1, false);
-  else if (cmd == "B1") setRelay(relay2, true);
-  else if (cmd == "B0") setRelay(relay2, false);
-  else if (cmd == "C1") setRelay(relay3, true);
-  else if (cmd == "C0") setRelay(relay3, false);
-  else if (cmd == "D1") setRelay(relay4, true);
-  else if (cmd == "D0") setRelay(relay4, false);
+  else if (isRelayCommand(cmd)) applyRelayCommand(cmd);
   else {
     Serial.print("Invalid Command: ");
     Serial.println(cmd);
