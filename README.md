@@ -26,6 +26,10 @@ The complete circuit design for WIZARD is included in the repository.
 
 The relay module is active-low, so the firmware drives a relay pin LOW to switch its appliance ON.
 
+## ⚡ Relay Logic
+
+The relay module is active-low: `LOW` switches an appliance ON and `HIGH` switches it OFF. The firmware initializes all four relays to OFF during startup.
+
 ## 📡 Bluetooth Command Table
 
 | Command | Function |
