@@ -80,6 +80,10 @@ void applyRelayCommand(const String &cmd) {
 }
 
 void handleCommand(String cmd) {
+  if (cmd.length() == 0) {
+    Serial.println("Invalid Command: empty");
+    return;
+  }
   if (cmd.length() > 16) {
     Serial.println("Invalid Command: too long");
     return;
