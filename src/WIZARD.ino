@@ -23,10 +23,7 @@ void setup() {
   pinMode(relay3, OUTPUT);
   pinMode(relay4, OUTPUT);
 
-  setRelay(relay1, false);
-  setRelay(relay2, false);
-  setRelay(relay3, false);
-  setRelay(relay4, false);
+  setAllRelays(false);
 
   printStartupMessage();
 }
