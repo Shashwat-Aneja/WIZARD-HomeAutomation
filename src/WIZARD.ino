@@ -80,7 +80,7 @@ int relayPinForCommand(const String &cmd) {
     case 'B': return relay2;
     case 'C': return relay3;
     case 'D': return relay4;
-    default: return -1;
+    default: return -1; // Unsupported relay identifiers are rejected safely.
   }
 }
 
