@@ -60,6 +60,7 @@ void setRelay(int relayPin, bool enabled) {
 // Relays are active-low, so RELAY_ON is LOW and RELAY_OFF is HIGH.
 
 void printStatus() {
+  Serial.println("WIZARD Relay Status");
   Serial.print("A:"); Serial.println(digitalRead(relay1) == RELAY_ON ? "ON" : "OFF");
   Serial.print("B:"); Serial.println(digitalRead(relay2) == RELAY_ON ? "ON" : "OFF");
   Serial.print("C:"); Serial.println(digitalRead(relay3) == RELAY_ON ? "ON" : "OFF");
@@ -99,6 +100,7 @@ void applyRelayCommand(const String &cmd) {
   }
 }
 
+// Validation order: reject empty/oversized input before dispatching commands.
 void handleCommand(String cmd) {
   if (cmd.length() == 0) {
     Serial.println("Invalid Command: empty");
