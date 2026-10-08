@@ -98,6 +98,10 @@ The example shows the expected acknowledgement and state-reporting format used w
 4. Verify relay behavior with a low-voltage test load first.
 5. Update documentation when the command protocol changes.
 
+## 🧯 Fault-Handling Expectations
+
+The firmware should fail safely for malformed commands. Empty, oversized, unsupported, or invalid relay identifiers must not change relay state. Physical relay wiring should also be verified independently before mains operation.
+
 ## 📶 Command Protocol
 
 Commands are trimmed and converted to uppercase before processing. Individual appliance commands use a letter followed by `1` or `0`; scene commands use `ALL1` and `ALL0`. Successful commands return a state update followed by a `Command OK` acknowledgement. Unsupported commands return an `Invalid Command` response.
