@@ -9,6 +9,7 @@ const int relay3 = 4;
 const int relay4 = 5;
 const int RELAY_ON = LOW;
 const int RELAY_OFF = HIGH;
+const int MAX_COMMAND_LENGTH = 16;
 
 const String CMD_HELP = "HELP";
 const String CMD_STATUS = "STATUS";
@@ -24,7 +25,6 @@ void setup() {
   pinMode(relay4, OUTPUT);
 
   setAllRelays(false);
-
   printStartupMessage();
 }
 
@@ -96,7 +96,7 @@ void handleCommand(String cmd) {
     Serial.println("Invalid Command: empty");
     return;
   }
-  if (cmd.length() > 16) {
+  if (cmd.length() > MAX_COMMAND_LENGTH) {
     Serial.println("Invalid Command: too long");
     return;
   }
@@ -119,7 +119,6 @@ void handleCommand(String cmd) {
   Serial.print("State updated: ");
   Serial.print(cmd);
   Serial.println(" OK");
-  // Successful appliance commands return both state and acknowledgement lines.
   Serial.print("Command OK: ");
   Serial.println(cmd);
 }
