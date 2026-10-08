@@ -81,6 +81,7 @@ Send A1/A0, B1/B0, C1/C0, D1/D0
 State updated: A1 OK
 Command OK: A1
 > STATUS
+WIZARD Relay Status
 A:ON
 B:OFF
 C:OFF
@@ -88,6 +89,14 @@ D:OFF
 ```
 
 The example shows the expected acknowledgement and state-reporting format used while testing the firmware.
+
+## 🔧 Development Workflow
+
+1. Make firmware changes in `src/WIZARD.ino`.
+2. Compile and upload using Arduino IDE.
+3. Test commands through Serial Monitor at 9600 baud.
+4. Verify relay behavior with a low-voltage test load first.
+5. Update documentation when the command protocol changes.
 
 ## 📶 Command Protocol
 
