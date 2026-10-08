@@ -26,6 +26,7 @@ void setup() {
 
   setAllRelays(false);
   printStartupMessage();
+  Serial.println("Safety: all relays initialized OFF");
 }
 
 void printStartupMessage() {
