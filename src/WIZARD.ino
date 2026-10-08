@@ -74,9 +74,21 @@ bool isRelayCommand(const String &cmd) {
   return cmd.length() == 2 && cmd.charAt(0) >= 'A' && cmd.charAt(0) <= 'D' && (cmd.charAt(1) == '0' || cmd.charAt(1) == '1');
 }
 
+int relayPinForCommand(const String &cmd) {
+  switch (cmd.charAt(0)) {
+    case 'A': return relay1;
+    case 'B': return relay2;
+    case 'C': return relay3;
+    case 'D': return relay4;
+    default: return -1;
+  }
+}
+
 void applyRelayCommand(const String &cmd) {
-  int relayPin = relay1 + (cmd.charAt(0) - 'A');
-  setRelay(relayPin, cmd.charAt(1) == '1');
+  int relayPin = relayPinForCommand(cmd);
+  if (relayPin >= 0) {
+    setRelay(relayPin, cmd.charAt(1) == '1');
+  }
 }
 
 void handleCommand(String cmd) {
@@ -97,7 +109,7 @@ void handleCommand(String cmd) {
   if (cmd == CMD_HELP) { printHelp(); return; }
   if (cmd == CMD_ALL_ON) { setAllRelays(true); Serial.println("ALL ON"); return; }
   if (cmd == CMD_ALL_OFF) { setAllRelays(false); Serial.println("ALL OFF"); return; }
-  else if (isRelayCommand(cmd)) applyRelayCommand(cmd);
+  if (isRelayCommand(cmd)) applyRelayCommand(cmd);
   else {
     Serial.print("Invalid Command: ");
     Serial.println(cmd);
