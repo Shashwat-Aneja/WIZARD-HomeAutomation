@@ -1,5 +1,6 @@
 # WIZARD-HomeAutomation
 Smart home automation using Arduino, relay modules and Bluetooth.
+
 ## 🔌 Circuit Diagram
 
 The complete circuit design for WIZARD is included in the repository.
@@ -60,6 +61,17 @@ The relay module is active-low: `LOW` switches an appliance ON and `HIGH` switch
 5. Test `ALL1`, `ALL0`, and `STATUS` before connecting mains-powered loads.
 6. Verify invalid and oversized commands are rejected without changing relay state.
 
+## 🧭 Command Validation Flow
+
+Firmware validates input in this order:
+1. Reject empty commands.
+2. Reject commands longer than 16 characters.
+3. Handle supported diagnostic and scene commands.
+4. Validate individual relay commands against A-D plus 0/1.
+5. Apply the relay change only after validation succeeds.
+
+This keeps malformed input from reaching the relay-control layer.
+
 ## 📶 Command Protocol
 
 Commands are trimmed and converted to uppercase before processing. Individual appliance commands use a letter followed by `1` or `0`; scene commands use `ALL1` and `ALL0`. Successful commands return a state update followed by a `Command OK` acknowledgement. Unsupported commands return an `Invalid Command` response.
@@ -74,16 +86,16 @@ Before connecting mains-powered appliances, verify relay pin mapping, test every
 
 ## ⚠️ Safety Notes
 
-- Appliances run on **high voltage AC**, handle carefully.  
-- Double-check relay wiring before connecting AC.  
-- Neutral wire must always go directly to the appliance.  
-- Use proper insulation and avoid loose connections.  
+- Appliances run on **high voltage AC**, handle carefully.
+- Double-check relay wiring before connecting AC.
+- Neutral wire must always go directly to the appliance.
+- Use proper insulation and avoid loose connections.
 - Test the system with a small 5V/12V load before using AC devices.
 
-  ## 🖥️ Serial Monitor
+## 🖥️ Serial Monitor
 
 Use **9600 baud** when testing the firmware through the Arduino Serial Monitor. Accepted appliance commands return a state update followed by a `Command OK` acknowledgement.
 
 ## 📸 Media
-No images or videos are included in this repository. All functionality is demonstrated through code, circuit diagrams, and documentation.
 
+No images or videos are included in this repository. All functionality is demonstrated through code, circuit diagrams, and documentation.
