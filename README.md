@@ -72,6 +72,23 @@ Firmware validates input in this order:
 
 This keeps malformed input from reaching the relay-control layer.
 
+## 🧪 Example Serial Session
+
+```text
+WIZARD System Ready
+Send A1/A0, B1/B0, C1/C0, D1/D0
+> A1
+State updated: A1 OK
+Command OK: A1
+> STATUS
+A:ON
+B:OFF
+C:OFF
+D:OFF
+```
+
+The example shows the expected acknowledgement and state-reporting format used while testing the firmware.
+
 ## 📶 Command Protocol
 
 Commands are trimmed and converted to uppercase before processing. Individual appliance commands use a letter followed by `1` or `0`; scene commands use `ALL1` and `ALL0`. Successful commands return a state update followed by a `Command OK` acknowledgement. Unsupported commands return an `Invalid Command` response.
