@@ -33,18 +33,22 @@ void printStartupMessage() {
   Serial.println("Send A1/A0, B1/B0, C1/C0, D1/D0");
 }
 
-void loop() {
-  if (Serial.available()) {
-    delay(5);
-    command = Serial.readString();
-    normalizeCommand(command);
-    handleCommand(command);
-  }
+String readCommand() {
+  return Serial.readString();
 }
 
 void normalizeCommand(String &cmd) {
   cmd.trim();
   cmd.toUpperCase();
+}
+
+void loop() {
+  if (Serial.available()) {
+    delay(5);
+    command = readCommand();
+    normalizeCommand(command);
+    handleCommand(command);
+  }
 }
 
 void setRelay(int relayPin, bool enabled) {
