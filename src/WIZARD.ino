@@ -37,10 +37,14 @@ void loop() {
   if (Serial.available()) {
     delay(5);
     command = Serial.readString();
-    command.trim();
-    command.toUpperCase();
+    normalizeCommand(command);
     handleCommand(command);
   }
+}
+
+void normalizeCommand(String &cmd) {
+  cmd.trim();
+  cmd.toUpperCase();
 }
 
 void setRelay(int relayPin, bool enabled) {
