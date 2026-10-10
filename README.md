@@ -129,3 +129,12 @@ Use **9600 baud** when testing the firmware through the Arduino Serial Monitor. 
 ## 📸 Media
 
 No images or videos are included in this repository. All functionality is demonstrated through code, circuit diagrams, and documentation.
+
+## Command validation and safe startup
+
+- Commands are trimmed and normalized to uppercase, so inputs such as `a1` are accepted as `A1`.
+- Empty commands, commands longer than 16 characters, and unsupported commands are rejected without changing relay state.
+- Each individual relay command must be exactly two characters: relay identifier `A` through `D`, followed by `0` (OFF) or `1` (ON).
+- Startup initializes all relay outputs to OFF before accepting commands. Confirm the relay board's active-low behavior and wiring before connecting mains-powered loads.
+- Use `STATUS` after a command to verify the reported relay state.
+
