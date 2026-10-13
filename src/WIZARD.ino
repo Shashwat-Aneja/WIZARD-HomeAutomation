@@ -19,6 +19,8 @@ String command = "";
 
 void setup() {
   Serial.begin(9600);
+  // Prevent incomplete Bluetooth commands from blocking the control loop too long.
+  Serial.setTimeout(50);
   pinMode(relay1, OUTPUT);
   pinMode(relay2, OUTPUT);
   pinMode(relay3, OUTPUT);
