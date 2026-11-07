@@ -20,14 +20,20 @@ unsigned long lastCommandByteAt = 0;
 void handleCommand(const char* cmd);
 void processSerialInput();
 
+void initializeRelayOutput(int pin) {
+  // Preload the inactive HIGH level before enabling the output driver.
+  // This avoids a LOW pulse on active-low relay modules during startup.
+  digitalWrite(pin, RELAY_OFF);
+  pinMode(pin, OUTPUT);
+}
+
 void setup() {
   Serial.begin(9600);
-  pinMode(relay1, OUTPUT);
-  pinMode(relay2, OUTPUT);
-  pinMode(relay3, OUTPUT);
-  pinMode(relay4, OUTPUT);
+  initializeRelayOutput(relay1);
+  initializeRelayOutput(relay2);
+  initializeRelayOutput(relay3);
+  initializeRelayOutput(relay4);
 
-  setAllRelays(false);
   printStartupMessage();
   Serial.println("Safety: all relays initialized OFF");
 }
