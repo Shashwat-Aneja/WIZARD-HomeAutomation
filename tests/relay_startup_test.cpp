@@ -41,6 +41,10 @@ public:
 
 FakeSerial Serial;
 
+// The Arduino build system generates prototypes automatically; the native
+// harness declares this one explicitly before including the sketch.
+void printStartupMessage();
+
 #include "../src/WIZARD.ino"
 
 int main() {
