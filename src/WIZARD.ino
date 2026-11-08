@@ -5,6 +5,7 @@
 
 #include <string.h>
 #include "CommandParser.h"
+#include "RelaySafety.h"
 
 const int relay1 = 2;
 const int relay2 = 3;
@@ -22,12 +23,14 @@ void processSerialInput();
 
 void setup() {
   Serial.begin(9600);
-  pinMode(relay1, OUTPUT);
-  pinMode(relay2, OUTPUT);
-  pinMode(relay3, OUTPUT);
-  pinMode(relay4, OUTPUT);
 
-  setAllRelays(false);
+  // Active-low relays must be driven HIGH before becoming outputs. This
+  // avoids a startup pulse that could briefly energize an attached load.
+  initializeActiveLowRelay(relay1, RELAY_OFF, OUTPUT);
+  initializeActiveLowRelay(relay2, RELAY_OFF, OUTPUT);
+  initializeActiveLowRelay(relay3, RELAY_OFF, OUTPUT);
+  initializeActiveLowRelay(relay4, RELAY_OFF, OUTPUT);
+
   printStartupMessage();
   Serial.println("Safety: all relays initialized OFF");
 }
