@@ -141,6 +141,10 @@ void handleCommand(const char* cmd) {
 }
 
 void dispatchCommand(CommandParser::Result result) {
+  if (result == CommandParser::INVALID) {
+    Serial.println("Invalid Command: unsupported byte");
+    return;
+  }
   if (result == CommandParser::TOO_LONG) {
     Serial.println("Invalid Command: too long");
     return;
@@ -166,3 +170,4 @@ void processSerialInput() {
     dispatchCommand(commandParser.finish());
   }
 }
+

@@ -44,6 +44,28 @@ int main() {
     assert(std::strcmp(parser.command(), "") == 0);
 
     assert(parser.feed('\n') == CommandParser::INCOMPLETE);
+    for (const unsigned char invalid : {0U, 1U, 27U, 127U, 255U}) {
+        parser.feed('A');
+        parser.feed('L');
+        parser.feed('L');
+        parser.feed('1');
+        parser.feed(static_cast<char>(invalid));
+        parser.feed('X');
+        assert(parser.hasPending());
+        assert(parser.feed('\n') == CommandParser::INVALID);
+        assert(!parser.hasPending());
+        assert(std::strcmp(parser.command(), "") == 0);
+        // The next valid command must recover without a reboot.
+        parser.feed('A');
+        parser.feed('0');
+        assert(parser.finish() == CommandParser::READY);
+        assert(std::strcmp(parser.command(), "A0") == 0);
+        parser.reset();
+    }
+    parser.feed('\0');
+    assert(parser.hasPending());
+    assert(parser.finish() == CommandParser::INVALID);
     std::cout << "CommandParser tests passed\n";
     return 0;
 }
+

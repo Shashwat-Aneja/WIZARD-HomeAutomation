@@ -10,10 +10,11 @@ public:
     enum Result {
         INCOMPLETE,
         READY,
-        TOO_LONG
+        TOO_LONG,
+        INVALID
     };
 
-    CommandParser() : length_(0), overflow_(false) {
+    CommandParser() : length_(0), overflow_(false), invalid_(false) {
         buffer_[0] = '\0';
     }
 
@@ -21,7 +22,14 @@ public:
         if (value == '\r' || value == '\n') {
             return finish();
         }
-        if (overflow_) {
+        if (overflow_ || invalid_) {
+            return INCOMPLETE;
+        }
+        // C-string comparisons must never accept a valid prefix followed by
+        // NUL or other non-protocol bytes. Discard the entire frame.
+        const unsigned char byte = static_cast<unsigned char>(value);
+        if ((byte < 32 && value != '\t') || byte > 126) {
+            invalid_ = true;
             return INCOMPLETE;
         }
         if (length_ >= MAX_COMMAND_LENGTH) {
@@ -34,6 +42,10 @@ public:
     }
 
     Result finish() {
+        if (invalid_) {
+            reset();
+            return INVALID;
+        }
         if (overflow_) {
             reset();
             return TOO_LONG;
@@ -46,7 +58,7 @@ public:
     }
 
     bool hasPending() const {
-        return length_ > 0 || overflow_;
+        return length_ > 0 || overflow_ || invalid_;
     }
 
     const char* command() const {
@@ -56,6 +68,7 @@ public:
     void reset() {
         length_ = 0;
         overflow_ = false;
+        invalid_ = false;
         buffer_[0] = '\0';
     }
 
@@ -91,6 +104,8 @@ private:
     char buffer_[MAX_COMMAND_LENGTH + 1];
     size_t length_;
     bool overflow_;
+    bool invalid_;
 };
 
 #endif
+
