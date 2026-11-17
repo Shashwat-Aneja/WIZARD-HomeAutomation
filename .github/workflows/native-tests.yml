@@ -1,0 +1,17 @@
+name: Native WIZARD logic tests
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile and execute native parser and relay tests
+        run: |
+          for source in tests/*_test.cpp; do
+            executable="/tmp/$(basename "$source" .cpp)"
+            g++ -std=c++11 -Wall -Wextra -Werror "$source" -o "$executable"
+            "$executable"
+          done

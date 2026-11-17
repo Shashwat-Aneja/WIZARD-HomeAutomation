@@ -138,3 +138,6 @@ No images or videos are included in this repository. All functionality is demons
 - Startup initializes all relay outputs to OFF before accepting commands. Confirm the relay board's active-low behavior and wiring before connecting mains-powered loads.
 - Use `STATUS` after a command to verify the reported relay state.
 
+
+
+Frames containing NUL, non-ASCII bytes, or control bytes other than permitted whitespace are discarded entirely. A malformed suffix cannot turn a valid-looking prefix into a relay command.
